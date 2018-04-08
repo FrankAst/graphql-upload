@@ -1,0 +1,77 @@
+{
+  "name": "graphql-upload",
+  "main": "lib/index.js",
+  "version": "0.0.0-semantically-released",
+  "description": "The middleware for uploading any files to the GraphQL Server.",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrankAst/graphql-upload.git"
+  },
+  "keywords": [
+    "graphql",
+    "graphql-upload",
+    "image-uploader",
+    "multer",
+    "graphql-multer",
+    "file-upload",
+    "graphql-file-upload"
+  ],
+  "bugs": {
+    "url": "https://github.com/FrankAst/graphql-upload/issues"
+  },
+  "homepage": "https://github.com/FrankAst/graphql-upload",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "22.4.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.13.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-flowtype": "^2.42.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "fetch-mock": "^6.0.0",
+    "flow-bin": "^0.69.0",
+    "jest": "22.4.3",
+    "mongodb-memory-server": "^1.6.5",
+    "nodemon": "^1.15.1",
+    "prettier": "^1.10.2",
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ]
+  },
+  "scripts": {
+    "build": "npm run build-cjs && npm run build-flow",
+    "build-cjs": "rimraf lib && babel src --ignore __tests__,__mocks__,__fixtures__ -d lib",
+    "build-flow": "find ./src -name '*.js' -not -path '*/__*' | while read filepath; do cp $filepath `echo $filepath | sed 's/\\/src\\//\\/lib\\//g'`.flow; done",
+    "watch": "jest --watch",
+    "coverage": "jest --coverage --maxWorkers 2",
+    "lint": "eslint --ext .js ./src",
+    "flow": "./node_modules/.bin/flow",
+    "test": "npm run coverage && npm run lint && npm run flow",
+    "semantic-release": "semantic-release"
+  }
+}
